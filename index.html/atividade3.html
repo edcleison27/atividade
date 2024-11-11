@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Item à Lista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        #lista {
+            margin-top: 20px;
+        }
+        li {
+            font-size: 18px;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            width: 60%;
+            margin: 10px 0;
+        }
+        input[type="radio"] {
+            margin: 0 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adicionar Item à Lista</h1>
+    
+    <label for="texto">Texto do item:</label>
+    <input type="text" id="texto" placeholder="Digite o texto do item">
+
+    <div>
+        <label><input type="radio" name="cores" value="red"> Vermelho</label>
+        <label><input type="radio" name="cores" value="green"> Verde</label>
+        <label><input type="radio" name="cores" value="blue"> Azul</label>
+    </div>
+
+    <button id="adicionarBtn">Adicionar à Lista</button>
+
+    <ul id="lista">
+        <!-- Itens da lista serão adicionados aqui -->
+    </ul>
+
+    <script>
+        // Função para adicionar item à lista
+        function adicionarItem() {
+            // Obter o texto do input
+            let texto = document.getElementById("texto").value;
+
+            // Verificar se o texto foi preenchido
+            if (texto === "") {
+                alert("Por favor, digite o texto para o item.");
+                return;
+            }
+
+            // Obter a cor selecionada
+            let cor = document.querySelector('input[name="cores"]:checked');
+            if (!cor) {
+                alert("Por favor, escolha uma cor para o item.");
+                return;
+            }
+
+            cor = cor.value; // A cor escolhida pelo usuário
+
+            // Criar um novo item de lista (li)
+            let novoItem = document.createElement("li");
+
+            // Adicionar o texto ao item
+            novoItem.textContent = texto;
+
+            // Definir a cor de fundo do item
+            novoItem.style.backgroundColor = cor;
+
+            // Adicionar o novo item à lista
+            document.getElementById("lista").appendChild(novoItem);
+
+            // Limpar o campo de texto após adicionar
+            document.getElementById("texto").value = "";
+        }
+
+        // Adicionar evento ao botão "Adicionar à Lista"
+        document.getElementById("adicionarBtn").addEventListener("click", adicionarItem);
+    </script>
+
+</body>
+</html>
